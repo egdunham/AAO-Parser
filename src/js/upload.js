@@ -21,7 +21,6 @@ inputFile.addEventListener("change", (e) => {
 
 uploadBox.addEventListener("submit", (e) => 
     {   e.preventDefault();
-
         // Check for valid file and confirm selection
         if (toConvert === null) {
             alert("Please select a file to convert!");
@@ -34,11 +33,6 @@ uploadBox.addEventListener("submit", (e) =>
         else {
             confirm("Convert " + toConvert[0].name + " to EAD?");
             parse_container_list();
-
-            //console.log(`File Count: ${toConvert.length}`);
-            //console.log(toConvert);
-
-            // IF RETURNS TRUE CALL CONVERSION STUFF
         }
         
     })

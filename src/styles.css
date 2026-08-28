@@ -12,12 +12,17 @@ body {
   line-height: 80%;
 }
 
+h2 {
+  color: #5b7880;
+  font-size: 28px;
+}
+
 /* Responsive design formatting */
 * {
   box-sizing: border-box;
 }
 
-p {
+* {
   font-size: 20px;
 }
 
@@ -88,22 +93,26 @@ p {
     text-decoration: none;
   }
 
-  .left-menu a:hover {
-    text-decoration: none;
-    color: black;
-  }
+.left-menu a:hover {
+  text-decoration: none;
+  color: black;
+}
 
 .left-menu li:hover {
   background-color: #5b7880;
 }
 
 /* File upload formatting */
-.upload-wrapper {
+.upload-wrapper, .input-format {
   padding: 20px;
   border-radius: 15px;
   background-color: white;
   grid-template-rows: auto auto 1fr auto;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.256);
+}
+
+.spacer {
+  height: 20px;
 }
 
 .upload-zone {
@@ -127,6 +136,28 @@ p {
   right: 0;
   cursor: pointer;
   opacity: 0;
+}
+
+.input-box {
+  display: flex;
+  justify-items: center;
+  align-content: center;
+  margin-bottom: 15px;
+}
+
+label {
+  width: 12%;
+}
+
+ input[type="text"],
+ input[type="tel"],
+ input[type="email"],
+ input[type="number"],
+ textarea {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .bi-cloud-upload {

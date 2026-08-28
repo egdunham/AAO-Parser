@@ -39,18 +39,36 @@ function error_handling (errors) {
     //TODO create some errors on purpose to test
 }
 
+// RETURN THE STRING HAVING TO DO WITH FRONT MATTER FROM HERE
+function process_front_matter() {
+    let front_matter = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><ead><eadheader langencoding=\"ISO_639-2b\" scriptencoding=\"iso15924\" relatedencoding=\"dc\" repositoryencoding=\"iso15511\" countryencoding=\"iso3166-1\" dateencoding=\"iso8601\"><eadid countrycode=\"us\" mainagencycode=\"";
+
+    //Add agency code and publicid
+    front_matter = front_matter + document.getElementById("repo_code").value + "\" encodinganalog=\"identifier\" publicid=\"-//" + document.getElementById("repo_name").value + "//text(us::" + document.getElementById("repo_code").value + ":://EN\">"
+
+    // Add filename
+    front_matter = front_matter + document.getElementById("guide_filetitle").value + "</eadid>"
+
+    
+      console.log(front_matter)
+      
+}
+
 function process_container_list(results) {
     // Fix this up some
-    document.getElementById("content").innerHTML = "";
+    //document.getElementById("content").innerHTML = "";
     //console.log(results.data);
-    let success = document.createTextNode("WOOHOO");
-    document.getElementById('content').appendChild(success);
+    //let success = document.createTextNode("WOOHOO");
+    //document.getElementById('content').appendChild(success);
 
     // MAYBE FARM OUT FRONT MATTER PROCESSING HERE??
+    process_front_matter();
+
+
+    // Add first portion of the container list
+    let container_list = "<dsc>"
 
     // Variables to indicate presence of series
-    // Add opening dsc to the container list
-    let container_list = "<dsc>"
     let series = "";
 
     // Check for series and group by series if present
@@ -61,18 +79,29 @@ function process_container_list(results) {
     else {
         series = Object.groupBy(results.data, ({ Series }) => Series);
         // ADD A SUBSERIES CHECK HERE
+        // POSSIBLY YOU CAN DO THIS WITH WHILE AND RUN THROUGH VARIOUS SUBSERIES UNTIL YOU HIT SOMETHING THAT'S A BOX
 
+        // Isolate series names
         var keys = Object.keys(series);
 
-
+        // Append each series to the xml and process the box and folder list
         for (let i = 0; i < keys.length; i++) {
-            console.log(keys[i])
+            //console.log(keys[i])
+
+            // Append series name to XML and add necessary tags
             let series_name = keys[i];
-            console.log(series[series_name])
+            container_list = container_list + "<c01><did><unittitle>" + series_name + "</unittitle></did>"
+
+            // Add boxes and folders
+            box_folder(series[series_name]);
+
+            // Close out c01 after all boxes have been added
+            container_list = container_list + "</c01>"
         }
 
-
-        
+        // Close out dsc after container list is complete
+        container_list = container_list + "</dsc>" 
+        //console.log(container_list)
     }
     
 
@@ -83,7 +112,12 @@ function process_container_list(results) {
 
 }
 
-function box_folder () {}
+// NEEDS TO RETURN THE BOX AND FOLDER LIST SO YOU CAN TACK IT ONTO THE CONTAINER LIST
+function box_folder (item_array) {
+    console.log("HIT")
+    
+    console.log(item_array)
+}
 
 // DO NEED TO EXPORT THESE
 export function parse_container_list () {
