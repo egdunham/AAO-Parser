@@ -114,8 +114,6 @@ function process_container_list(results) {
 
 // NEEDS TO RETURN THE BOX AND FOLDER LIST SO YOU CAN TACK IT ONTO THE CONTAINER LIST
 function box_folder (item_array) {
-    console.log("HIT")
-    
     console.log(item_array)
 }
 

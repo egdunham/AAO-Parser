@@ -1,4 +1,4 @@
-import {parse_container_list} from "./write_ead.js"
+//import {parse_container_list} from "./write_ead.js"
 
 const uploadBox = document.querySelector('.upload-wrapper')
 const uploadZone = document.querySelector('.upload-zone');
@@ -8,7 +8,7 @@ const inputFile = document.querySelector('#input-file');
 const fileName = document.querySelector('.file-name');
 const fileSize = document.querySelector('.file-size');
 
-let toConvert = null;
+let toConvert1 = null;
 
 const handleOnChange = (file) => {
     fileName.textContent = file.name;
@@ -22,16 +22,16 @@ inputFile.addEventListener("change", (e) => {
 uploadBox.addEventListener("submit", (e) => 
     {   e.preventDefault();
         // Check for valid file and confirm selection
-        if (toConvert === null) {
+        if (toConvert1 === null) {
             alert("Please select a file to convert!");
         }
 
-        else if (toConvert.length > 1) {
+        else if (toConvert1.length > 1) {
             alert("Only one file can be converted at a time!");
         }
 
         else {
-            confirm("Convert " + toConvert[0].name + " to EAD?");
+            confirm("Convert " + toConvert1[0].name + " to EAD?");
             parse_container_list();
         }
         
@@ -40,7 +40,7 @@ uploadBox.addEventListener("submit", (e) =>
 uploadBox.addEventListener("reset", () => {
     fileName.textContent = "No File Uploaded";
     fileSize.textContent = "0.00 KB"
-    toConvert = null;
+    toConvert1 = null;
 })
 
 uploadZone.addEventListener('dragenter', () => uploadZone.classList.add('is-dragging'));
@@ -55,5 +55,5 @@ uploadZone.addEventListener("drop", (e) => {
     e.preventDefault()
     handleOnChange(e.dataTransfer.files[0])
     uploadZone.classList.remove('is-dragging')
-    toConvert = e.dataTransfer.files;
+    toConvert1 = e.dataTransfer.files;
 })
