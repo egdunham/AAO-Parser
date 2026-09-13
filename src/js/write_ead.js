@@ -92,6 +92,8 @@ function process_container_list(results) {
             let series_name = keys[i];
             container_list = container_list + "<c01><did><unittitle>" + series_name + "</unittitle></did>"
 
+            // ADD SUBSERIES IN ABOUT HERE
+
             // Add boxes and folders
             box_folder(series[series_name]);
 
@@ -131,7 +133,7 @@ export function parse_container_list () {
             error_handling (results.errors);
         }
         
-        // Otherwise, process the file
+        // Otherwise, process the file -- MAKE A JSON AND PASS IT ALONG
         else {
             process_container_list(results)
         }
